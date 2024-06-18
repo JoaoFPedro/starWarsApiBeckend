@@ -35,7 +35,7 @@ app.post("/", async (req, res) => {
 //Delete Method
 app.delete("/:id", async (req, res) => {
   const film = await Movie.findByIdAndDelete(req.params.id);
-  return res.send(film);
+  return res.send(film) ;
 });
 
 //Update Method
