@@ -7,10 +7,6 @@ app.use(express.json());
 
 const port = 3000;
 
-mongoose.connect(
-  "mongodb+srv://joaofpsilva98:N2XdX6cbGVqbjczc@starwarsapi.x0iwbpo.mongodb.net/?retryWrites=true&w=majority&appName=StarWarsAPI"
-);
-
 const Movie = mongoose.model("Movie", {
   title: String,
   description: String,
@@ -18,8 +14,9 @@ const Movie = mongoose.model("Movie", {
   trailer_url: String,
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.get("/", async (req, res) => {
+  const filmes = await Movie.find();
+  res.send(filmes);
 });
 
 app.post("/", async (req, res) => {
@@ -35,4 +32,7 @@ app.post("/", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`App running on port: ${port}`);
+  mongoose.connect(
+    "mongodb+srv://joaofpsilva98:N2XdX6cbGVqbjczc@starwarsapi.x0iwbpo.mongodb.net/?retryWrites=true&w=majority&appName=StarWarsAPI"
+  );
 });
